@@ -1,12 +1,17 @@
 const inputPergunta = document.getElementById("pergunta")
 const inputResposta = document.getElementById("resposta")
-const OPEN_API_KEY = "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"
+const OPEN_API_KEY = ""
 
 inputPergunta.addEventListener("keypress", (e) => {
     if(inputPergunta.value && e.key === "Enter"){
         buscaPergunta();
     }
 })
+
+function limpaChat(){
+    inputPergunta.value = '';
+    inputResposta.value = '';
+}
 
 function buscaPergunta(){
     
@@ -22,7 +27,7 @@ function buscaPergunta(){
         body: JSON.stringify({
             model: "text-davinci-003",
             prompt: sPergunta,
-            max_tokens: 2048,
+            max_tokens: 3500,
             temperature: 0.5,
         })
     })
@@ -49,7 +54,7 @@ function buscaPergunta(){
         inputPergunta.focus();
     })
 
-    if(inputResposta.value) inputResposta.value += "\n\n\n";
+    if(inputResposta.value) inputResposta.value += "\n";
     inputResposta.value += `Eu: ${sPergunta}`
 
     inputResposta.scrollTop = inputResposta.scrollHeight;
